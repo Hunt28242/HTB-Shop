@@ -7,13 +7,13 @@
     <style>
         :root {
             --primary-yellow: #FFDE4D;
-            --dark-bg: #0F0F11;
-            --card-bg: #16161A;
-            --card-hover: #1F1F24;
+            --dark-bg: #0A0A0C; /* Deeper black for ultra-premium feel */
+            --card-bg: #121214; /* Darker, stealthier card background */
+            --card-hover: #19191E;
             --text-main: #FFFFFF;
-            --text-muted: #94A3B8;
+            --text-muted: #8E9BAF;
             --discord-blue: #5865F2;
-            --danger-red: #EF4444;
+            --danger-red: #F87171; /* Slightly softer, more modern red */
         }
 
         * {
@@ -21,12 +21,34 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased; /* Sharper text rendering */
         }
 
         body {
             background-color: var(--dark-bg);
             color: var(--text-main);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Full-screen Background Layer */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                /* Gradient to subtly blend and enhance contrast */
+                linear-gradient(to top, rgba(10, 10, 12, 0.9) 0%, rgba(10, 10, 12, 0.7) 100%),
+                /* Subtly stylized version of image_f3149b.jpg */
+                url('image_f3149b.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15; /* Subtly embedded into the deep black background */
+            z-index: -1;
+            transform: scale(1.05); /* Slight scale to ensure crisp edges */
         }
 
         /* Hero Shop Header */
@@ -38,89 +60,89 @@
             align-items: center;
             text-align: center;
             padding: 40px 20px;
-            background: radial-gradient(circle at center, rgba(255, 222, 77, 0.15) 0%, rgba(15, 15, 17, 0) 70%);
             position: relative;
         }
 
         h1 {
-            font-size: 6rem;
+            font-size: 6.5rem; /* Larger, more impactful header */
             font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
+            letter-spacing: -3px; /* Tighter spacing for a modern look */
+            margin-bottom: 5px;
             color: var(--primary-yellow);
-            text-shadow: 0 0 40px rgba(255, 222, 77, 0.2);
+            text-shadow: 0 0 50px rgba(255, 222, 77, 0.25);
         }
 
         .shop-subtitle {
             font-size: 1.2rem;
             color: var(--text-muted);
-            margin-bottom: 30px;
-            max-width: 500px;
+            margin-bottom: 35px;
+            max-width: 550px;
             line-height: 1.6;
         }
 
         .discord-btn {
             background-color: var(--discord-blue);
             color: white;
-            padding: 16px 36px;
-            font-size: 1.1rem;
+            padding: 16px 40px; /* Wider padding for better click-area */
+            font-size: 1.15rem;
             font-weight: 600;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3);
+            transition: all 0.2s ease-out;
+            box-shadow: 0 6px 25px rgba(88, 101, 242, 0.35);
         }
 
         .discord-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             background-color: #4752C4;
-            box-shadow: 0 6px 24px rgba(88, 101, 242, 0.4);
+            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.45);
         }
 
         /* Shop Container */
         .shop-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 100px 20px;
+            padding: 0 20px 120px 20px; /* More bottom padding for content breathing room */
         }
 
         .category-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--text-main);
-            margin: 50px 0 24px 0;
-            padding-bottom: 10px;
+            margin: 60px 0 30px 0;
+            padding-bottom: 12px;
             border-bottom: 2px solid rgba(255, 255, 255, 0.05);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase; /* More professional, modern title */
         }
 
         /* Product Grid */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider card minimum */
+            gap: 28px; /* Increased gap for cleanliness */
         }
 
         /* Product Card */
         .product-card {
             background-color: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 18px; /* Softer corner radius */
+            padding: 28px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1); /* Smoother animation curve */
             position: relative;
             overflow: hidden;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px); /* More significant hover movement */
             background-color: var(--card-hover);
-            border-color: rgba(255, 222, 77, 0.2);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 222, 77, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
         }
 
         .role-badge {
@@ -128,22 +150,22 @@
             font-weight: 700;
             text-transform: uppercase;
             color: var(--primary-yellow);
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
         }
 
         .product-name {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             color: var(--text-main);
         }
 
         .price-tag {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 800;
             color: var(--primary-yellow);
-            margin-bottom: 24px;
+            margin-bottom: 26px;
             display: flex;
             align-items: baseline;
         }
@@ -153,12 +175,12 @@
             background-color: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px;
+            padding: 13px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-out;
             text-align: center;
             text-decoration: none;
         }
@@ -171,30 +193,31 @@
 
         /* Shop Policy Footer */
         .shop-footer {
-            margin-top: 80px;
+            margin-top: 100px;
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 18px;
+            padding: 35px;
             text-align: center;
-            border: 1px solid rgba(255, 48, 48, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.1); /* Match new danger-red */
         }
 
         .policy-tag {
             color: var(--danger-red);
             font-weight: 800;
-            letter-spacing: 2px;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            letter-spacing: 2.2px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
         }
 
         .policy-text {
             color: var(--text-muted);
             font-size: 1rem;
+            line-height: 1.5;
         }
 
         .scroll-hint {
             position: absolute;
-            bottom: 40px;
+            bottom: 45px;
             color: var(--text-muted);
             font-size: 0.85rem;
             letter-spacing: 2px;
@@ -203,6 +226,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Full-screen Background Layer -->
+    <div class="background-image"></div>
 
     <!-- Hero Header -->
     <header>
