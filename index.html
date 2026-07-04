@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTB Store</title>
+    <style>
+        :root {
+            --primary-yellow: #FFDE4D;
+            --dark-bg: #121212;
+            --card-bg: #1E1E1E;
+            --text-main: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --discord-blue: #5865F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-yellow);
+            color: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        header {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .discord-btn {
+            background-color: var(--discord-blue);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .discord-btn:hover {
+            transform: translateY(-3px);
+            background-color: #4752C4;
+        }
+
+        /* Roles Section */
+        .container {
+            width: 100%;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .roles-section {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .role-group {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-yellow);
+        }
+
+        .role-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 1.15rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .role-item:last-child {
+            border-bottom: none;
+        }
+
+        .role-name {
+            font-weight: 600;
+        }
+
+        .role-price {
+            color: var(--primary-yellow);
+            font-weight: 700;
+        }
+
+        /* Notice Footer */
+        .notice-box {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 222, 77, 0.05);
+            border: 1px dashed var(--primary-yellow);
+            border-radius: 8px;
+        }
+
+        .no-refunds {
+            color: #FF4D4D;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .instructions {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Header -->
+    <header>
+        <h1>HTB</h1>
+        <a href="#" class="discord-btn">Join Discord</a>
+        <div class="scroll-indicator">Scroll Down</div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="roles-section">
+
+            <!-- Group 1 -->
+            <div class="role-group">
+                <div class="role-item">
+                    <span class="role-name">Head Management</span>
+                    <span class="role-price">$250</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Management</span>
+                    <span class="role-price">$200</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Head Assistant</span>
+                    <span class="role-price">$175</span>
+                </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="role-group">
+                <div class="role-item">
+                    <span class="role-name">First in Command</span>
+                    <span class="role-price">$150</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Second in Command</span>
+                    <span class="role-price">$125</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Third in Command</span>
+                    <span class="role-price">$100</span>
+                </div>
+            </div>
+
+            <!-- Group 3 -->
+            <div class="role-group">
+                <div class="role-item">
+                    <span class="role-name">Head Administrator</span>
+                    <span class="role-price">$85</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Senior Administrator</span>
+                    <span class="role-price">$75</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Administrator</span>
+                    <span class="role-price">$65</span>
+                </div>
+            </div>
+
+            <!-- Group 4 -->
+            <div class="role-group">
+                <div class="role-item">
+                    <span class="role-name">Lead Moderator</span>
+                    <span class="role-price">$50</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Senior Moderator</span>
+                    <span class="role-price">$40</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Moderator</span>
+                    <span class="role-price">$30</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Junior Moderator</span>
+                    <span class="role-price">$20</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Trial Moderator</span>
+                    <span class="role-price">$15</span>
+                </div>
+            </div>
+
+            <!-- Group 5 -->
+            <div class="role-group">
+                <div class="role-item">
+                    <span class="role-name">Staff Assistant</span>
+                    <span class="role-price">$10</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Staff Intern</span>
+                    <span class="role-price">$8</span>
+                </div>
+            </div>
+
+            <!-- Group 6 -->
+            <div class="role-group">
+                <div class="role-item">
+                    <span class="role-name">One Tap Access</span>
+                    <span class="role-price">$6</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Hitta</span>
+                    <span class="role-price">$4</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-name">Half</span>
+                    <span class="role-price">$2</span>
+                </div>
+            </div>
+
+            <!-- Footer Notice -->
+            <div class="notice-box">
+                <div class="no-refunds">NO REFUNDS</div>
+                <div class="instructions">Open a ticket if you would like to purchase a role.</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
