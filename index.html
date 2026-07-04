@@ -11,7 +11,7 @@
         :root {
             --primary-yellow: #FFDE4D;
             --bg-black: #050505;
-            --card-surface: rgba(14, 14, 16, 0.85); /* Semi-transparent to let background peek through */
+            --card-surface: rgba(14, 14, 16, 0.85);
             --card-surface-hover: rgba(20, 20, 23, 0.95);
             --text-white: #FFFFFF;
             --text-grey: #A1A1AA;
@@ -28,24 +28,15 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Enforce image_f31f9d.jpg across the entire screen layout */
         body {
-            background-color: var(--bg-black);
+            background: 
+                linear-gradient(to bottom, rgba(5, 5, 5, 0.82) 0%, rgba(5, 5, 5, 0.92) 100%),
+                url('image_f31f9d.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: var(--text-white);
             overflow-x: hidden;
-        }
-
-        /* Full Screen Fixed Background Photo */
-        .site-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: 
-                linear-gradient(to bottom, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.92) 100%),
-                url('image_f31f9d.jpg') no-repeat center center;
-            background-size: cover;
-            z-index: -1;
+            min-height: 100vh;
         }
 
         /* Top Navigation Bar */
@@ -205,7 +196,7 @@
             gap: 20px;
         }
 
-        /* Minimalist Display Cards (No Buttons) */
+        /* Minimalist Display Cards */
         .product-card {
             background-color: var(--card-surface);
             backdrop-filter: blur(8px);
@@ -284,7 +275,6 @@
             line-height: 1.6;
         }
 
-        /* Responsive Optimization */
         @media (max-width: 768px) {
             .hero h1 { font-size: 4.5rem; letter-spacing: -2px; }
             .product-grid { grid-template-columns: 1fr; }
@@ -295,15 +285,12 @@
 </head>
 <body>
 
-    <!-- Full Screen Fixed Background -->
-    <div class="site-bg"></div>
-
     <!-- Header Navigation -->
     <nav>
         <div class="nav-logo">HTB<span>.</span></div>
         <div class="nav-links">
             <a href="#store">Store</a>
-            <a href="#">Discord</a>
+            <a href="https://discord.gg/jPCZmwc2tz" target="_blank">Discord</a>
         </div>
     </nav>
 
@@ -312,7 +299,7 @@
         <div class="hero-content">
             <h1>HTB<span>OFFICIAL STORE</span></h1>
             <p>Access high-value leadership tiers and accessible tier opportunities. Acquire structural ranks engineered to provide maximum ecosystem value.</p>
-            <a href="#" class="discord-btn">Join Discord</a>
+            <a href="https://discord.gg/jPCZmwc2tz" target="_blank" class="discord-btn">Join Discord</a>
         </div>
     </section>
 
@@ -507,4 +494,4 @@
     </main>
 
 </body>
-</html>
+</html>\
