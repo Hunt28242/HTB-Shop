@@ -4,468 +4,576 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTB Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-yellow: #FFDE4D;
-            --dark-bg: #0A0A0C; /* Deeper black for ultra-premium feel */
-            --card-bg: #121214; /* Darker, stealthier card background */
-            --card-hover: #19191E;
-            --text-main: #FFFFFF;
-            --text-muted: #8E9BAF;
-            --discord-blue: #5865F2;
-            --danger-red: #F87171; /* Slightly softer, more modern red */
+            --bg-black: #050505;
+            --card-surface: #0E0E10;
+            --card-surface-hover: #141417;
+            --text-white: #FFFFFF;
+            --text-grey: #71717A;
+            --discord-color: #5865F2;
+            --discord-hover: #4752C4;
+            --neon-red: #EF4444;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            -webkit-font-smoothing: antialiased; /* Sharper text rendering */
+            font-family: "Montserrat", sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--text-main);
+            background-color: var(--bg-black);
+            color: var(--text-white);
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Full-screen Background Layer */
-        .background-image {
-            position: fixed;
+        /* Top Navigation Bar */
+        nav {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: 
-                /* Gradient to subtly blend and enhance contrast */
-                linear-gradient(to top, rgba(10, 10, 12, 0.9) 0%, rgba(10, 10, 12, 0.7) 100%),
-                /* Subtly stylized version of image_f3149b.jpg */
-                url('image_f3149b.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15; /* Subtly embedded into the deep black background */
-            z-index: -1;
-            transform: scale(1.05); /* Slight scale to ensure crisp edges */
-        }
-
-        /* Hero Shop Header */
-        header {
-            min-height: 80vh;
+            width: 100%;
+            height: 90px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
+            padding: 0 4%;
+            z-index: 10;
         }
 
-        h1 {
-            font-size: 6.5rem; /* Larger, more impactful header */
+        .nav-logo {
             font-weight: 900;
-            letter-spacing: -3px; /* Tighter spacing for a modern look */
-            margin-bottom: 5px;
-            color: var(--primary-yellow);
-            text-shadow: 0 0 50px rgba(255, 222, 77, 0.25);
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+            color: var(--text-white);
         }
 
-        .shop-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 35px;
-            max-width: 550px;
+        .nav-logo span {
+            color: var(--primary-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* Immersive Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 6%;
+            background: 
+                linear-gradient(90deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.8) 40%, rgba(5,5,5,0.2) 100%),
+                url('image_f3183a.jpg') no-repeat center center;
+            background-size: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-content {
+            max-width: 650px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 7rem;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--text-white);
+        }
+
+        .hero h1 span {
+            color: var(--primary-yellow);
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-grey);
             line-height: 1.6;
+            margin-bottom: 35px;
+            font-weight: 500;
         }
 
         .discord-btn {
-            background-color: var(--discord-blue);
-            color: white;
-            padding: 16px 40px; /* Wider padding for better click-area */
-            font-size: 1.15rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
+            display: inline-block;
+            background-color: var(--discord-color);
+            color: var(--text-white);
             text-decoration: none;
-            transition: all 0.2s ease-out;
-            box-shadow: 0 6px 25px rgba(88, 101, 242, 0.35);
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.3);
         }
 
         .discord-btn:hover {
-            transform: translateY(-3px);
-            background-color: #4752C4;
-            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.45);
+            background-color: var(--discord-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.4s);
         }
 
-        /* Shop Container */
+        /* Shop Container Layout */
         .shop-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px 120px 20px; /* More bottom padding for content breathing room */
+            padding: 100px 4% 120px 4%;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 span {
+            color: var(--primary-yellow);
+        }
+
+        .category-block {
+            margin-bottom: 80px;
         }
 
         .category-title {
-            font-size: 1.6rem;
-            color: var(--text-main);
-            margin: 60px 0 30px 0;
-            padding-bottom: 12px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
-            letter-spacing: 0.8px;
-            text-transform: uppercase; /* More professional, modern title */
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-grey);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        /* Product Grid */
+        .category-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Product Grid Alignment */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider card minimum */
-            gap: 28px; /* Increased gap for cleanliness */
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
         }
 
-        /* Product Card */
+        /* Premium Minimalist Product Cards */
         .product-card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 18px; /* Softer corner radius */
-            padding: 28px;
+            background-color: var(--card-surface);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1); /* Smoother animation curve */
-            position: relative;
-            overflow: hidden;
+            min-height: 220px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .product-card:hover {
-            transform: translateY(-8px); /* More significant hover movement */
-            background-color: var(--card-hover);
-            border-color: rgba(255, 222, 77, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            background-color: var(--card-surface-hover);
+            border-color: rgba(255, 222, 77, 0.2);
+            transform: translateY(-6px);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .role-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-white);
         }
 
         .role-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--primary-yellow);
-            letter-spacing: 1.2px;
-            margin-bottom: 10px;
-        }
-
-        .product-name {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            color: var(--text-main);
-        }
-
-        .price-tag {
-            font-size: 1.9rem;
+            font-size: 0.65rem;
             font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             color: var(--primary-yellow);
-            margin-bottom: 26px;
+            background: rgba(255, 222, 77, 0.06);
+            padding: 6px 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .card-bottom {
             display: flex;
-            align-items: baseline;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .buy-btn {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 13px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease-out;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .product-card:hover .buy-btn {
-            background-color: var(--primary-yellow);
-            color: var(--dark-bg);
-            border-color: var(--primary-yellow);
-        }
-
-        /* Shop Policy Footer */
-        .shop-footer {
-            margin-top: 100px;
-            background-color: var(--card-bg);
-            border-radius: 18px;
-            padding: 35px;
-            text-align: center;
-            border: 1px solid rgba(248, 113, 113, 0.1); /* Match new danger-red */
-        }
-
-        .policy-tag {
-            color: var(--danger-red);
+        .price-display {
+            font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: 2.2px;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
+            color: var(--text-white);
         }
 
-        .policy-text {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .scroll-hint {
-            position: absolute;
-            bottom: 45px;
-            color: var(--text-muted);
+        .buy-action-btn {
+            background: transparent;
+            color: var(--primary-yellow);
+            border: 1px solid var(--primary-yellow);
+            padding: 10px 24px;
+            border-radius: 6px;
             font-size: 0.85rem;
-            letter-spacing: 2px;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .buy-action-btn {
+            background-color: var(--primary-yellow);
+            color: var(--bg-black);
+        }
+
+        /* Grid Footer & Rules */
+        .shop-rules {
+            background: linear-gradient(135deg, #0E0E10 0%, #070708 100%);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .rules-tag {
+            color: var(--neon-red);
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .rules-desc {
+            color: var(--text-grey);
+            font-size: 1rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Responsive Optimization */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 4.5rem; letter-spacing: -2px; }
+            .product-grid { grid-template-columns: 1fr; }
+            nav { justify-content: center; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Full-screen Background Layer -->
-    <div class="background-image"></div>
+    <!-- Header Navigation -->
+    <nav>
+        <div class="nav-logo">HTB<span>.</span></div>
+        <div class="nav-links">
+            <a href="#store">Store</a>
+            <a href="#">Discord</a>
+        </div>
+    </nav>
 
-    <!-- Hero Header -->
-    <header>
-        <h1>HTB</h1>
-        <p class="shop-subtitle">Premium ranks and perks. Lower tier options remain highly accessible while elite leadership roles offer ultimate value.</p>
-        <a href="#" class="discord-btn">Join Discord</a>
-        <div class="scroll-hint">Explore Ranks Below</div>
-    </header>
+    <!-- Visual Hero Landing Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>HTB<span>OFFICIAL STORE</span></h1>
+            <p>Access high-value leadership tiers and accessible tier opportunities. Acquire structural ranks engineered to provide maximum ecosystem value.</p>
+            <a href="#" class="discord-btn">Join Discord</a>
+        </div>
+    </section>
 
-    <!-- Main Online Shop -->
-    <main class="shop-container">
+    <!-- Main Store Layout -->
+    <main class="shop-container" id="store">
+        
+        <div class="section-header">
+            <h2>Available <span>Ranks</span></h2>
+        </div>
 
-        <!-- Category: Executive -->
-        <h2 class="category-title">Executive Ranks</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Management Tier</div>
-                    <div class="product-name">Head Management</div>
+        <!-- Group: Executive -->
+        <div class="category-block">
+            <div class="category-title">Executive Management</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Head Management</div>
+                        <div class="role-badge">Tier 1</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$250</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-tag">$250</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Management</div>
+                        <div class="role-badge">Tier 1</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$200</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Management Tier</div>
-                    <div class="product-name">Management</div>
-                </div>
-                <div>
-                    <div class="price-tag">$200</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Management Tier</div>
-                    <div class="product-name">Head Assistant</div>
-                </div>
-                <div>
-                    <div class="price-tag">$175</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Head Assistant</div>
+                        <div class="role-badge">Tier 1</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$175</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Category: Command -->
-        <h2 class="category-title">Command Ranks</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">High Command</div>
-                    <div class="product-name">First in Command</div>
+        <!-- Group: Command -->
+        <div class="category-block">
+            <div class="category-title">Command Ranks</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">First in Command</div>
+                        <div class="role-badge">Tier 2</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$150</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-tag">$150</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Second in Command</div>
+                        <div class="role-badge">Tier 2</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$125</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">High Command</div>
-                    <div class="product-name">Second in Command</div>
-                </div>
-                <div>
-                    <div class="price-tag">$125</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">High Command</div>
-                    <div class="product-name">Third in Command</div>
-                </div>
-                <div>
-                    <div class="price-tag">$100</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Category: Administration -->
-        <h2 class="category-title">Administration</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Admin Team</div>
-                    <div class="product-name">Head Administrator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$85</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Admin Team</div>
-                    <div class="product-name">Senior Administrator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$75</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Admin Team</div>
-                    <div class="product-name">Administrator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$65</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Third in Command</div>
+                        <div class="role-badge">Tier 2</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$100</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Category: Moderation -->
-        <h2 class="category-title">Moderation Team</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Mod Team</div>
-                    <div class="product-name">Lead Moderator</div>
+        <!-- Group: Administration -->
+        <div class="category-block">
+            <div class="category-title">Administration</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Head Administrator</div>
+                        <div class="role-badge">Admin</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$85</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-tag">$50</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Senior Administrator</div>
+                        <div class="role-badge">Admin</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$75</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Mod Team</div>
-                    <div class="product-name">Senior Moderator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$40</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Mod Team</div>
-                    <div class="product-name">Moderator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$30</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Mod Team</div>
-                    <div class="product-name">Junior Moderator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$20</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Mod Team</div>
-                    <div class="product-name">Trial Moderator</div>
-                </div>
-                <div>
-                    <div class="price-tag">$15</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Administrator</div>
+                        <div class="role-badge">Admin</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$65</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Category: Staff Support -->
-        <h2 class="category-title">Staff Support</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Support</div>
-                    <div class="product-name">Staff Assistant</div>
+        <!-- Group: Moderation -->
+        <div class="category-block">
+            <div class="category-title">Moderation Operations</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Lead Moderator</div>
+                        <div class="role-badge">Mod</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$50</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-tag">$10</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Senior Moderator</div>
+                        <div class="role-badge">Mod</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$40</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Support</div>
-                    <div class="product-name">Staff Intern</div>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Moderator</div>
+                        <div class="role-badge">Mod</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$30</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-tag">$8</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Junior Moderator</div>
+                        <div class="role-badge">Mod</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$20</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Category: Entry Tier -->
-        <h2 class="category-title">Entry Perks</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Perk Access</div>
-                    <div class="product-name">One Tap Access</div>
-                </div>
-                <div>
-                    <div class="price-tag">$6</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Perk Access</div>
-                    <div class="product-name">Hitta</div>
-                </div>
-                <div>
-                    <div class="price-tag">$4</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div>
-                    <div class="role-badge">Perk Access</div>
-                    <div class="product-name">Half</div>
-                </div>
-                <div>
-                    <div class="price-tag">$2</div>
-                    <a href="#" class="buy-btn">Purchase Role</a>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Trial Moderator</div>
+                        <div class="role-badge">Mod</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$15</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Shop Footer Policy -->
-        <footer class="shop-footer">
-            <div class="policy-tag">NO REFUNDS</div>
-            <div class="policy-text">Open a support ticket in our Discord server if you would like to purchase a role.</div>
-        </footer>
+        <!-- Group: Staff Support -->
+        <div class="category-block">
+            <div class="category-title">Support Elements</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Staff Assistant</div>
+                        <div class="role-badge">Staff</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$10</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Staff Intern</div>
+                        <div class="role-badge">Staff</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$8</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group: Entry Tier Perks -->
+        <div class="category-block">
+            <div class="category-title">Entry & Asset Access</div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">One Tap Access</div>
+                        <div class="role-badge">Perk</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$6</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Hitta</div>
+                        <div class="role-badge">Perk</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$4</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-top">
+                        <div class="role-name">Half</div>
+                        <div class="role-badge">Perk</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price-display">$2</div>
+                        <a href="#" class="buy-action-btn">Purchase</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance & Ticket notice -->
+        <div class="shop-rules">
+            <div class="rules-tag">No Refunds</div>
+            <div class="rules-desc">Please open a support ticket inside our official Discord server if you would like to complete your role acquisition process.</div>
+        </div>
 
     </main>
 
