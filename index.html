@@ -11,10 +11,10 @@
         :root {
             --primary-yellow: #FFDE4D;
             --bg-black: #050505;
-            --card-surface: #0E0E10;
-            --card-surface-hover: #141417;
+            --card-surface: rgba(14, 14, 16, 0.85); /* Semi-transparent to let background peek through */
+            --card-surface-hover: rgba(20, 20, 23, 0.95);
             --text-white: #FFFFFF;
-            --text-grey: #71717A;
+            --text-grey: #A1A1AA;
             --discord-color: #5865F2;
             --discord-hover: #4752C4;
             --neon-red: #EF4444;
@@ -32,6 +32,20 @@
             background-color: var(--bg-black);
             color: var(--text-white);
             overflow-x: hidden;
+        }
+
+        /* Full Screen Fixed Background Photo */
+        .site-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                linear-gradient(to bottom, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.92) 100%),
+                url('image_f31f9d.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
         }
 
         /* Top Navigation Bar */
@@ -78,19 +92,14 @@
             color: var(--primary-yellow);
         }
 
-        /* Immersive Hero Section */
+        /* Hero Section */
         .hero {
             position: relative;
-            min-height: 100vh;
+            min-height: 85vh;
             width: 100%;
             display: flex;
             align-items: center;
-            padding: 0 6%;
-            background: 
-                linear-gradient(90deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.8) 40%, rgba(5,5,5,0.2) 100%),
-                url('image_f3183a.jpg') no-repeat center center;
-            background-size: cover;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 90px 6% 0 6%;
         }
 
         .hero-content {
@@ -139,14 +148,16 @@
         .discord-btn:hover {
             background-color: var(--discord-hover);
             transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.4s);
+            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.4);
         }
 
         /* Shop Container Layout */
         .shop-container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 100px 4% 120px 4%;
+            padding: 40px 4% 120px 4%;
+            position: relative;
+            z-index: 2;
         }
 
         .section-header {
@@ -165,7 +176,7 @@
         }
 
         .category-block {
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .category-title {
@@ -174,7 +185,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-grey);
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -184,44 +195,44 @@
             content: '';
             flex-grow: 1;
             height: 1px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Product Grid Alignment */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
         }
 
-        /* Premium Minimalist Product Cards */
+        /* Minimalist Display Cards (No Buttons) */
         .product-card {
             background-color: var(--card-surface);
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 35px;
+            padding: 28px 32px;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            min-height: 220px;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            align-items: center;
+            transition: all 0.3s ease;
         }
 
         .product-card:hover {
             background-color: var(--card-surface-hover);
-            border-color: rgba(255, 222, 77, 0.2);
-            transform: translateY(-6px);
+            border-color: rgba(255, 222, 77, 0.3);
+            transform: translateY(-3px);
         }
 
-        .card-top {
+        .card-details {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .role-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: -0.5px;
             color: var(--text-white);
@@ -233,50 +244,22 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--primary-yellow);
-            background: rgba(255, 222, 77, 0.06);
-            padding: 6px 12px;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-
-        .card-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 35px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            align-self: flex-start;
         }
 
         .price-display {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--text-white);
-        }
-
-        .buy-action-btn {
-            background: transparent;
             color: var(--primary-yellow);
-            border: 1px solid var(--primary-yellow);
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover .buy-action-btn {
-            background-color: var(--primary-yellow);
-            color: var(--bg-black);
+            letter-spacing: -0.5px;
         }
 
         /* Grid Footer & Rules */
         .shop-rules {
-            background: linear-gradient(135deg, #0E0E10 0%, #070708 100%);
-            border: 1px solid rgba(239, 68, 68, 0.15);
+            background: rgba(14, 14, 16, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(239, 68, 68, 0.2);
             border-radius: 16px;
             padding: 40px;
             text-align: center;
@@ -293,7 +276,7 @@
         }
 
         .rules-desc {
-            color: var(--text-grey);
+            color: var(--text-white);
             font-size: 1rem;
             font-weight: 500;
             max-width: 600px;
@@ -311,6 +294,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Full Screen Fixed Background -->
+    <div class="site-bg"></div>
 
     <!-- Header Navigation -->
     <nav>
@@ -342,34 +328,25 @@
             <div class="category-title">Executive Management</div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Head Management</div>
-                        <div class="role-badge">Tier 1</div>
+                    <div class="card-details">
+                        <span class="role-badge">Management Tier</span>
+                        <span class="role-name">Head Management</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$250</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$250</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Management</div>
-                        <div class="role-badge">Tier 1</div>
+                    <div class="card-details">
+                        <span class="role-badge">Management Tier</span>
+                        <span class="role-name">Management</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$200</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$200</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Head Assistant</div>
-                        <div class="role-badge">Tier 1</div>
+                    <div class="card-details">
+                        <span class="role-badge">Management Tier</span>
+                        <span class="role-name">Head Assistant</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$175</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$175</div>
                 </div>
             </div>
         </div>
@@ -379,34 +356,25 @@
             <div class="category-title">Command Ranks</div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">First in Command</div>
-                        <div class="role-badge">Tier 2</div>
+                    <div class="card-details">
+                        <span class="role-badge">High Command</span>
+                        <span class="role-name">First in Command</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$150</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$150</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Second in Command</div>
-                        <div class="role-badge">Tier 2</div>
+                    <div class="card-details">
+                        <span class="role-badge">High Command</span>
+                        <span class="role-name">Second in Command</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$125</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$125</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Third in Command</div>
-                        <div class="role-badge">Tier 2</div>
+                    <div class="card-details">
+                        <span class="role-badge">High Command</span>
+                        <span class="role-name">Third in Command</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$100</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$100</div>
                 </div>
             </div>
         </div>
@@ -416,34 +384,25 @@
             <div class="category-title">Administration</div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Head Administrator</div>
-                        <div class="role-badge">Admin</div>
+                    <div class="card-details">
+                        <span class="role-badge">Admin Team</span>
+                        <span class="role-name">Head Administrator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$85</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$85</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Senior Administrator</div>
-                        <div class="role-badge">Admin</div>
+                    <div class="card-details">
+                        <span class="role-badge">Admin Team</span>
+                        <span class="role-name">Senior Administrator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$75</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$75</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Administrator</div>
-                        <div class="role-badge">Admin</div>
+                    <div class="card-details">
+                        <span class="role-badge">Admin Team</span>
+                        <span class="role-name">Administrator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$65</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$65</div>
                 </div>
             </div>
         </div>
@@ -453,54 +412,39 @@
             <div class="category-title">Moderation Operations</div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Lead Moderator</div>
-                        <div class="role-badge">Mod</div>
+                    <div class="card-details">
+                        <span class="role-badge">Mod Team</span>
+                        <span class="role-name">Lead Moderator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$50</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$50</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Senior Moderator</div>
-                        <div class="role-badge">Mod</div>
+                    <div class="card-details">
+                        <span class="role-badge">Mod Team</span>
+                        <span class="role-name">Senior Moderator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$40</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$40</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Moderator</div>
-                        <div class="role-badge">Mod</div>
+                    <div class="card-details">
+                        <span class="role-badge">Mod Team</span>
+                        <span class="role-name">Moderator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$30</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$30</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Junior Moderator</div>
-                        <div class="role-badge">Mod</div>
+                    <div class="card-details">
+                        <span class="role-badge">Mod Team</span>
+                        <span class="role-name">Junior Moderator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$20</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$20</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Trial Moderator</div>
-                        <div class="role-badge">Mod</div>
+                    <div class="card-details">
+                        <span class="role-badge">Mod Team</span>
+                        <span class="role-name">Trial Moderator</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$15</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$15</div>
                 </div>
             </div>
         </div>
@@ -510,24 +454,18 @@
             <div class="category-title">Support Elements</div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Staff Assistant</div>
-                        <div class="role-badge">Staff</div>
+                    <div class="card-details">
+                        <span class="role-badge">Support</span>
+                        <span class="role-name">Staff Assistant</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$10</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$10</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Staff Intern</div>
-                        <div class="role-badge">Staff</div>
+                    <div class="card-details">
+                        <span class="role-badge">Support</span>
+                        <span class="role-name">Staff Intern</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$8</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$8</div>
                 </div>
             </div>
         </div>
@@ -537,42 +475,33 @@
             <div class="category-title">Entry & Asset Access</div>
             <div class="product-grid">
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">One Tap Access</div>
-                        <div class="role-badge">Perk</div>
+                    <div class="card-details">
+                        <span class="role-badge">Perk Access</span>
+                        <span class="role-name">One Tap Access</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$6</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$6</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Hitta</div>
-                        <div class="role-badge">Perk</div>
+                    <div class="card-details">
+                        <span class="role-badge">Perk Access</span>
+                        <span class="role-name">Hitta</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$4</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$4</div>
                 </div>
                 <div class="product-card">
-                    <div class="card-top">
-                        <div class="role-name">Half</div>
-                        <div class="role-badge">Perk</div>
+                    <div class="card-details">
+                        <span class="role-badge">Perk Access</span>
+                        <span class="role-name">Half</span>
                     </div>
-                    <div class="card-bottom">
-                        <div class="price-display">$2</div>
-                        <a href="#" class="buy-action-btn">Purchase</a>
-                    </div>
+                    <div class="price-display">$2</div>
                 </div>
             </div>
         </div>
 
-        <!-- Compliance & Ticket notice -->
+        <!-- Compliance Notice -->
         <div class="shop-rules">
             <div class="rules-tag">No Refunds</div>
-            <div class="rules-desc">Please open a support ticket inside our official Discord server if you would like to complete your role acquisition process.</div>
+            <div class="rules-desc">Please open a support ticket inside our official Discord server if you would like to purchase a role.</div>
         </div>
 
     </main>
