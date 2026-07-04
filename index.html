@@ -7,154 +7,198 @@
     <style>
         :root {
             --primary-yellow: #FFDE4D;
-            --dark-bg: #121212;
-            --card-bg: #1E1E1E;
+            --dark-bg: #0F0F11;
+            --card-bg: #16161A;
+            --card-hover: #1F1F24;
             --text-main: #FFFFFF;
-            --text-muted: #A0A0A0;
+            --text-muted: #94A3B8;
             --discord-blue: #5865F2;
+            --danger-red: #EF4444;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            background-color: var(--primary-yellow);
-            color: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* Hero Section */
+        /* Hero Shop Header */
         header {
-            width: 100%;
-            height: 100vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
+            background: radial-gradient(circle at center, rgba(255, 222, 77, 0.15) 0%, rgba(15, 15, 17, 0) 70%);
+            position: relative;
         }
 
         h1 {
-            font-size: 5rem;
+            font-size: 6rem;
             font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            color: var(--primary-yellow);
+            text-shadow: 0 0 40px rgba(255, 222, 77, 0.2);
+        }
+
+        .shop-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 500px;
+            line-height: 1.6;
         }
 
         .discord-btn {
             background-color: var(--discord-blue);
             color: white;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            padding: 16px 36px;
+            font-size: 1.1rem;
+            font-weight: 600;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3);
         }
 
         .discord-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             background-color: #4752C4;
+            box-shadow: 0 6px 24px rgba(88, 101, 242, 0.4);
         }
 
-        /* Roles Section */
-        .container {
-            width: 100%;
-            background-color: var(--dark-bg);
+        /* Shop Container */
+        .shop-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 100px 20px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
             color: var(--text-main);
-            padding: 60px 20px;
+            margin: 50px 0 24px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+            letter-spacing: 0.5px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        /* Product Card */
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .roles-section {
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .role-group {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 5px solid var(--primary-yellow);
-        }
-
-        .role-item {
-            display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            font-size: 1.15rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .role-item:last-child {
-            border-bottom: none;
+        .product-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--card-hover);
+            border-color: rgba(255, 222, 77, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .role-name {
-            font-weight: 600;
-        }
-
-        .role-price {
-            color: var(--primary-yellow);
+        .role-badge {
+            font-size: 0.75rem;
             font-weight: 700;
-        }
-
-        /* Notice Footer */
-        .notice-box {
-            text-align: center;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 222, 77, 0.05);
-            border: 1px dashed var(--primary-yellow);
-            border-radius: 8px;
-        }
-
-        .no-refunds {
-            color: #FF4D4D;
-            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-yellow);
             letter-spacing: 1px;
             margin-bottom: 8px;
         }
 
-        .instructions {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            font-size: 0.9rem;
+        .product-name {
+            font-size: 1.3rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.6;
-            animation: bounce 2s infinite;
+            margin-bottom: 16px;
+            color: var(--text-main);
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        .price-tag {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-yellow);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .product-card:hover .buy-btn {
+            background-color: var(--primary-yellow);
+            color: var(--dark-bg);
+            border-color: var(--primary-yellow);
+        }
+
+        /* Shop Policy Footer */
+        .shop-footer {
+            margin-top: 80px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 48, 48, 0.1);
+        }
+
+        .policy-tag {
+            color: var(--danger-red);
+            font-weight: 800;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .policy-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -163,122 +207,241 @@
     <!-- Hero Header -->
     <header>
         <h1>HTB</h1>
+        <p class="shop-subtitle">Premium ranks and perks. Lower tier options remain highly accessible while elite leadership roles offer ultimate value.</p>
         <a href="#" class="discord-btn">Join Discord</a>
-        <div class="scroll-indicator">Scroll Down</div>
+        <div class="scroll-hint">Explore Ranks Below</div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="roles-section">
+    <!-- Main Online Shop -->
+    <main class="shop-container">
 
-            <!-- Group 1 -->
-            <div class="role-group">
-                <div class="role-item">
-                    <span class="role-name">Head Management</span>
-                    <span class="role-price">$250</span>
+        <!-- Category: Executive -->
+        <h2 class="category-title">Executive Ranks</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Management Tier</div>
+                    <div class="product-name">Head Management</div>
                 </div>
-                <div class="role-item">
-                    <span class="role-name">Management</span>
-                    <span class="role-price">$200</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Head Assistant</span>
-                    <span class="role-price">$175</span>
+                <div>
+                    <div class="price-tag">$250</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
                 </div>
             </div>
-
-            <!-- Group 2 -->
-            <div class="role-group">
-                <div class="role-item">
-                    <span class="role-name">First in Command</span>
-                    <span class="role-price">$150</span>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Management Tier</div>
+                    <div class="product-name">Management</div>
                 </div>
-                <div class="role-item">
-                    <span class="role-name">Second in Command</span>
-                    <span class="role-price">$125</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Third in Command</span>
-                    <span class="role-price">$100</span>
+                <div>
+                    <div class="price-tag">$200</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
                 </div>
             </div>
-
-            <!-- Group 3 -->
-            <div class="role-group">
-                <div class="role-item">
-                    <span class="role-name">Head Administrator</span>
-                    <span class="role-price">$85</span>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Management Tier</div>
+                    <div class="product-name">Head Assistant</div>
                 </div>
-                <div class="role-item">
-                    <span class="role-name">Senior Administrator</span>
-                    <span class="role-price">$75</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Administrator</span>
-                    <span class="role-price">$65</span>
+                <div>
+                    <div class="price-tag">$175</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
                 </div>
             </div>
-
-            <!-- Group 4 -->
-            <div class="role-group">
-                <div class="role-item">
-                    <span class="role-name">Lead Moderator</span>
-                    <span class="role-price">$50</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Senior Moderator</span>
-                    <span class="role-price">$40</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Moderator</span>
-                    <span class="role-price">$30</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Junior Moderator</span>
-                    <span class="role-price">$20</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Trial Moderator</span>
-                    <span class="role-price">$15</span>
-                </div>
-            </div>
-
-            <!-- Group 5 -->
-            <div class="role-group">
-                <div class="role-item">
-                    <span class="role-name">Staff Assistant</span>
-                    <span class="role-price">$10</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Staff Intern</span>
-                    <span class="role-price">$8</span>
-                </div>
-            </div>
-
-            <!-- Group 6 -->
-            <div class="role-group">
-                <div class="role-item">
-                    <span class="role-name">One Tap Access</span>
-                    <span class="role-price">$6</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Hitta</span>
-                    <span class="role-price">$4</span>
-                </div>
-                <div class="role-item">
-                    <span class="role-name">Half</span>
-                    <span class="role-price">$2</span>
-                </div>
-            </div>
-
-            <!-- Footer Notice -->
-            <div class="notice-box">
-                <div class="no-refunds">NO REFUNDS</div>
-                <div class="instructions">Open a ticket if you would like to purchase a role.</div>
-            </div>
-
         </div>
-    </div>
+
+        <!-- Category: Command -->
+        <h2 class="category-title">Command Ranks</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">High Command</div>
+                    <div class="product-name">First in Command</div>
+                </div>
+                <div>
+                    <div class="price-tag">$150</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">High Command</div>
+                    <div class="product-name">Second in Command</div>
+                </div>
+                <div>
+                    <div class="price-tag">$125</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">High Command</div>
+                    <div class="product-name">Third in Command</div>
+                </div>
+                <div>
+                    <div class="price-tag">$100</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Administration -->
+        <h2 class="category-title">Administration</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Admin Team</div>
+                    <div class="product-name">Head Administrator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$85</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Admin Team</div>
+                    <div class="product-name">Senior Administrator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$75</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Admin Team</div>
+                    <div class="product-name">Administrator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$65</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Moderation -->
+        <h2 class="category-title">Moderation Team</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Mod Team</div>
+                    <div class="product-name">Lead Moderator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$50</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Mod Team</div>
+                    <div class="product-name">Senior Moderator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$40</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Mod Team</div>
+                    <div class="product-name">Moderator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$30</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Mod Team</div>
+                    <div class="product-name">Junior Moderator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$20</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Mod Team</div>
+                    <div class="product-name">Trial Moderator</div>
+                </div>
+                <div>
+                    <div class="price-tag">$15</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Staff Support -->
+        <h2 class="category-title">Staff Support</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Support</div>
+                    <div class="product-name">Staff Assistant</div>
+                </div>
+                <div>
+                    <div class="price-tag">$10</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Support</div>
+                    <div class="product-name">Staff Intern</div>
+                </div>
+                <div>
+                    <div class="price-tag">$8</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Entry Tier -->
+        <h2 class="category-title">Entry Perks</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Perk Access</div>
+                    <div class="product-name">One Tap Access</div>
+                </div>
+                <div>
+                    <div class="price-tag">$6</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Perk Access</div>
+                    <div class="product-name">Hitta</div>
+                </div>
+                <div>
+                    <div class="price-tag">$4</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div>
+                    <div class="role-badge">Perk Access</div>
+                    <div class="product-name">Half</div>
+                </div>
+                <div>
+                    <div class="price-tag">$2</div>
+                    <a href="#" class="buy-btn">Purchase Role</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Footer Policy -->
+        <footer class="shop-footer">
+            <div class="policy-tag">NO REFUNDS</div>
+            <div class="policy-text">Open a support ticket in our Discord server if you would like to purchase a role.</div>
+        </footer>
+
+    </main>
 
 </body>
 </html>
